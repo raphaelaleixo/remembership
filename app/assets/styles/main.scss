@@ -1,0 +1,66 @@
+@import "~assets/styles/_variables.scss";
+
+body {
+    margin:0;
+    padding:0;
+    font-family: 'Encode Sans', sans-serif;
+}
+
+a {
+    color: var(--pink);
+    font-weight: bolder;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin:0 auto;
+}
+
+.main {
+    background: var(--beige);
+    border-radius:5px;
+    padding:4.5em;
+}
+
+.header {
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    font-size: 1em;
+    height: 3.750em;
+    width:11em;
+    background:url(~/assets/images/logo.svg) no-repeat center left;
+    background-size: contain;
+    text-indent: -9999px;
+}
+
+.page-header__title {
+    font-size: 1.125em;
+    font-weight: normal;
+    color: var(--violet);
+    margin:0;
+}
+
+.page-header__big-text {
+    font-size: 1.875em;
+    color: var(--purple);
+    margin:0;
+    .price {
+        font-weight: bolder;
+    }
+    sup {
+        font-size: 0.575em;
+    }
+}
+
+.page-filters {
+    margin:2em 0;
+    display: flex;
+    & > * {
+        margin-right: 2em;
+    }
+}

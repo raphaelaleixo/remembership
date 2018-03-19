@@ -14,7 +14,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Encode+Sans:400,800' }
     ]
   },
 
@@ -27,6 +28,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '~/assets/styles/main.scss' 
   ],
 
   /*
@@ -52,4 +54,13 @@ module.exports = {
       
     }
   }
+  
+  // router: {
+  //   extendRouter(routes,resolve) {
+  //     routes.push({
+  //       path: '/',
+  //       component:resolve(__dirname, 'pages/index.vue')
+  //     })
+  //   }
+  // }
 }
