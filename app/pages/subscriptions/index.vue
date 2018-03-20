@@ -10,7 +10,6 @@
           <dropdown :options="typeDropdown"/>
           <dropdown :options="ordenationDropdown"/>
       </div>
-      {{teste}}
   </section>
 </template>
 <script>

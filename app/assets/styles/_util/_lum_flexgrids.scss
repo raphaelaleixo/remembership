@@ -1,0 +1,396 @@
+﻿// Grid responsivo
+//
+// Weight: 0
+//
+// Variáveis e *Mixins* para gerar grids responsivos. Essas regras devem ser usadas apenas na
+// criação de novos componentes, para facilitar a escrita de htmls mais semânticos.
+//
+// Styleguide Grids
+
+// Variáveis do grid responsivo
+//
+// Weight: 1
+//
+// Essas variáveis definem a quantidade de colunas padrão para os 3 principais 
+// *breakpoints* do grid, o espaço (*gutter*) entre cada coluna e as larguras
+// bases para cada breakpoint
+//
+// Styleguide Grids.Variables
+
+// Quantidade de colunas
+//
+// Definem a quantidade de colunas padrão para os 3 principais 
+// *breakpoints* do grid.
+//
+// $fs-grid-columns-sm - Número de colunas para telas em resolução sm/xs **(Padrão: 3)**
+// $fs-grid-columns-md - Número de colunas para telas em resolução md **(Padrão: 6)**
+// $fs-grid-columns-lg - Número de colunas para telas em resolução lg/xl **(Padrão: 12)**
+//
+// Styleguide Grids.Variables.Columms
+$fs-grid-columns-sm: 3;
+$fs-grid-columns-md: 6;
+$fs-grid-columns-lg: 12;
+
+// Espaço entre colunas
+//
+// $fs-grid-gutter - Espaço entre as colunas, em porcentagem **(Padrão: 1.0416666666666667%)**
+//
+// Styleguide Grids.Variables.Gutter
+$fs-grid-gutter: 1.0416666666666667%;
+
+// Largura máxima
+//
+// Essas variáveis definem o espaço máximo horizontal de uma div que utilize a
+// mixin **"fs_row"**. Elas variam de acordo com o tamanho da janela do
+// browser.
+//
+// $fs-grid-width-xs - Largura máxima para telas muito pequenas **(Padrão: 300px)**
+// $fs-grid-width-sm - Largura máxima para telas pequenas **(Padrão: 480px)**
+// $fs-grid-width-md - Largura máxima para telas médias **(Padrão: 720px)**
+// $fs-grid-width-lg - Largura máxima para telas grandes **(Padrão: 960px)**
+// $fs-grid-width-xl - Largura máxima para telas muito grandes **(Padrão: 1200px)**
+//
+// Styleguide Grids.Variables.CollumnSize
+$fs-grid-width-xs: 300px;
+$fs-grid-width-sm: 480px;
+$fs-grid-width-md: 720px;
+$fs-grid-width-lg: 960px;
+$fs-grid-width-xl: 1200px;
+
+// Breakpoints
+//
+// Definem os pontos ativos para *media querys* do layouts.
+//
+// $fs-grid-width-break-xs - *Breakpoint* para telas consideradas "muito pequenas"**(Padrão: 320px)**
+// $fs-grid-width-break-sm - *Breakpoint* para telas consideradas "pequenas" **(Padrão: 600px)**
+// $fs-grid-width-break-md - *Breakpoint* para telas consideradas "médias" **(Padrão: 740px)**
+// $fs-grid-width-break-lg - *Breakpoint* para telas consideradas "grandes" **(Padrão: 980px)**
+// $fs-grid-width-break-xl - *Breakpoint* para telas consideradas "muito grandes" **(Padrão: 1220px)**
+//
+// Styleguide Grids.Variables.Breakpoints
+$fs-grid-width-break-xs: 320px;
+$fs-grid-width-break-sm: 600px;
+$fs-grid-width-break-md: 740px;
+$fs-grid-width-break-lg: 980px;
+$fs-grid-width-break-xl: 1220px;
+
+// Media Queries (Desktop First)
+//
+// Definem as regras de *media querys* do layout, considerando o "max-width" como ponto de quebra.
+//
+// $fs-grid-mq-max-sm - Gera a regra: `"max-width: "($fs-grid-width-break-sm - 1px);`
+// $fs-grid-mq-max-md - Gera a regra: `"max-width: "($fs-grid-width-break-md - 1px);`
+// $fs-grid-mq-max-lg - Gera a regra: `"max-width: "($fs-grid-width-break-lg - 1px);`
+// $fs-grid-mq-max-xl - Gera a regra: `"max-width: "($fs-grid-width-break-xl - 1px);`
+//
+// Styleguide Grids.Variables.MediaQueryDesktop
+$fs-grid-mq-max-sm: "max-width: ($fs-grid-width-break-sm - 1px)";
+$fs-grid-mq-max-md: "max-width: ($fs-grid-width-break-md - 1px)";
+$fs-grid-mq-max-lg: "max-width: ($fs-grid-width-break-lg - 1px)";
+$fs-grid-mq-max-xl: "max-width: ($fs-grid-width-break-xl - 1px)"; 
+
+// Media Queries (Mobile First)
+//
+// Definem as regras de *media querys* do layout, considerando o "min-width" como ponto de quebra.
+//
+// $fs-grid-mq-min-sm - Gera a regra: `"min-width: "($fs-grid-width-break-sm);`
+// $fs-grid-mq-min-md - Gera a regra: `"min-width: "($fs-grid-width-break-md);`
+// $fs-grid-mq-min-lg - Gera a regra: `"min-width: "($fs-grid-width-break-lg);`
+// $fs-grid-mq-min-xl - Gera a regra: `"min-width: "($fs-grid-width-break-xl);`
+//
+// Styleguide Grids.Variables.MediaQueryMobile
+$fs-grid-mq-min-sm: "min-width: ($fs-grid-width-break-sm)";
+$fs-grid-mq-min-md: "min-width: ($fs-grid-width-break-md)";
+$fs-grid-mq-min-lg: "min-width: ($fs-grid-width-break-lg)";
+$fs-grid-mq-min-xl: "min-width: ($fs-grid-width-break-xl)";
+
+// Funções de apoio
+//
+// Weight: 2
+//
+// Styleguide Grids.Functions
+
+// autosizeCell($autosize)
+//
+// Verifica se a propriedade *autosize* é verdadeira. Se for, retorna os valores para
+// permitir que a célula tenha uma largura automática.
+//
+// $autosize - Valor booleano para a propriedade.
+//
+// Styleguide Grids.Functions.Autosize
+@function autosizeCell($autosize) {
+    @if $autosize==true {
+        @return 1 0 auto;
+    }
+    @else {
+        @return 0 1 auto;
+    }
+}
+
+// Mixins
+//
+// Weight: 3
+//
+// Styleguide Grids.Mixins
+
+// fs_grid_column
+//
+// Weight: 1
+//
+// Uso: `fs_grid_column($total, $margin, $count)`
+//
+// Cria uma nova coluna com largura definida.
+// 
+// $total - Número total de colunas.
+// $margin - Largura (em porcentagem) das margens.
+// $count - Quantas colunas do total devem ser ocupadas.
+//
+// Styleguide Grids.Mixins.GridColumn
+@mixin fs_grid_column($total, $margin, $count) {
+    width: (((100% / $total) * $count) - ($margin * 2));
+}
+
+// fs_grid_column_pushed
+//
+// Weight: 2
+//
+// Uso: `fs_grid_column_pushed($total, $margin, $count)`
+//
+// Faz com que a coluna tenha um offset de `$count` colunas.
+// 
+// $total - Número total de colunas.
+// $margin - Largura (em porcentagem) das margens.
+// $count - Quantas colunas do total devem ser ocupadas.
+//
+// Styleguide Grids.Mixins.GridColumnPushed
+@mixin fs_grid_column_pushed($total, $margin, $count) {
+    margin-left: ((100% / $total) * $count) + $margin;
+}
+
+// fs_row
+//
+// Weight: 3
+//
+// Uso: `fs_row($autosize, $justify, $align)`
+//
+// Define uma linha, com largura máxima definida, que deve conter colunas. 
+// 
+// $autosize - Booleano (default:false) - Diz se as colunas filhas devem ter seu tamanho
+//             definido automaticamente.
+// $justify - flex-start (default) | flex-end | center | space-between | space-around | space-evenly
+// $align - stretch (default) | flex-start | flex-end | center | baseline
+//
+// Styleguide Grids.Mixins.Row
+
+@mixin fs_row($autosize:false, $justify:flex-start, $align:stretch) {
+    width: 97.91666667%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+    @media screen and ($fs-grid-mq-min-sm) {
+        width: $fs-grid-width-sm;
+    }
+    @media screen and ($fs-grid-mq-min-md) {
+        width: $fs-grid-width-md;
+    }
+    @media screen and ($fs-grid-mq-min-lg) {
+        width: $fs-grid-width-lg;
+    }
+    @media screen and ($fs-grid-mq-min-xl) {
+        width: $fs-grid-width-xl;
+    }
+    &>* {
+        flex: autosizeCell($autosize);
+    }
+}
+
+// fs_row_row
+//
+// Weight: 4
+//
+// Uso: `fs_row_row($autosize, $justify, $align)`
+//
+// Dentro de uma coluna, define uma nova linha com colunas. Essa nova linha terá a largura máxima
+// da coluna à que pertence.
+// 
+// $autosize - Booleano (default:false) - Diz se as colunas filhas devem ter seu tamanho
+//             definido automaticamente.
+// $justify - flex-start (default) | flex-end | center | space-between | space-around | space-evenly
+// $align - stretch (default) | flex-start | flex-end | center | baseline
+//
+// Styleguide Grids.Mixins.RowRow
+
+@mixin fs_row_row($autosize:false, $justify:flex-start, $align:stretch) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+    width: 102.08333333%;
+    margin-left: -#{$fs-grid-gutter};
+    margin-right: -#{$fs-grid-gutter};
+    &>* {
+        flex: autosizeCell($autosize);
+    }
+}
+
+// fs_row_fluid
+//
+// Weight: 5
+//
+// Uso: `fs_row_fluid($autosize, $justify, $align)`
+//
+// Define uma linha, sem largura máxima definida (fluída), que deve conter colunas. 
+// 
+// $autosize - Booleano (default:false) - Diz se as colunas filhas devem ter seu tamanho
+//             definido automaticamente.
+// $justify - flex-start (default) | flex-end | center | space-between | space-around | space-evenly
+// $align - stretch (default) | flex-start | flex-end | center | baseline
+//
+// Styleguide Grids.Mixins.RowFluid
+
+@mixin fs_row_fluid($autosize:false, $justify:flex-start, $align:stretch) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+    &>* {
+        flex: autosizeCell($autosize);
+    }
+}
+
+@mixin fs_grid_cell {
+    width: 97.91666667%;
+    margin-left: 1.04166667%;
+    margin-right: 1.04166667%;
+}
+
+@mixin fs_grid_cell_padded {
+    box-sizing: content-box;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1.04166667%;
+    padding-right: 1.04166667%;
+}
+
+// !Small, 540 (max 740)
+@mixin fs_cell_xs($count, $total:0) {
+    @media screen and ($fs-grid-mq-max-sm) {
+        @if $total==0 {
+            @include fs_grid_column($fs-grid-columns-sm, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// Push
+@mixin fs_push_xs($count, $total:0) {
+    @media screen and ($fs-grid-mq-max-sm) {
+        @if $total==0 {
+            @include fs_grid_column_pushed($fs-grid-columns-sm, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column_pushed($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// !Min, 300 (max 500)
+@mixin fs_cell_sm($count, $total:0) {
+    @media screen and ($fs-grid-mq-max-md) {
+        @if $total==0 {
+            @include fs_grid_column($fs-grid-columns-sm, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// Push
+@mixin fs_push_sm($count, $total:0) {
+    @media screen and ($fs-grid-mq-max-md) {
+        @if $total==0 {
+            @include fs_grid_column_pushed($fs-grid-columns-sm, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column_pushed($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// !Medium, 6 column, 720 (min 740)
+@mixin fs_cell_md($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-md) and ($fs-grid-mq-max-lg) {
+        @if $total==0 {
+            @include fs_grid_column($fs-grid-columns-md, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// Push
+@mixin fs_push_md($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-md) and ($fs-grid-mq-max-lg) {
+        @if $total==0 {
+            @include fs_grid_column_pushed($fs-grid-columns-md, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column_pushed($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// !Large, 12 column, 960 (min 980)
+@mixin fs_cell_lg($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-lg) {
+        @if $total==0 {
+            @include fs_grid_column($fs-grid-columns-lg, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// Push
+@mixin fs_push_lg($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-lg) {
+        @if $total==0 {
+            @include fs_grid_column_pushed($fs-grid-columns-lg, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column_pushed($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// !XLarge, 12 column, 1200 (min 1220)
+@mixin fs_cell_xl($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-xl) {
+        @if $total==0 {
+            @include fs_grid_column($fs-grid-columns-lg, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column($total, $fs-grid-gutter, $count);
+        }
+    }
+}
+
+// Push
+@mixin fs_push_xl($count, $total:0) {
+    @media screen and ($fs-grid-mq-min-xl) {
+        @if $total==0 {
+            @include fs_grid_column_pushed($fs-grid-columns-lg, $fs-grid-gutter, $count);
+        }
+        @else {
+            @include fs_grid_column_pushed($total, $fs-grid-gutter, $count);
+        }
+    }
+}
