@@ -1,6 +1,9 @@
 <template>
   <div class="dropdown">
-      <div class="dropdown__trigger" :class="{'is-opened':isOpened}" tabindex="0" @click="toggleDropdown">{{selected}}</div>
+      <div class="dropdown__trigger" :class="{'is-opened':isOpened}" tabindex="0" @click="toggleDropdown">
+        {{selected}}
+        <chevron-down class="dropdown__arrow"/>
+      </div>
       <transition name="fadeIn" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <div class="dropdown__target" v-show="isOpened" :aria-hidden="!isOpened">
               <ul class="dropdown__options">
@@ -17,7 +20,12 @@
 </template>
 
 <script>
+import chevronDown from '~/components/icons/chevron-down.vue';
+
 export default {
+  components: {
+    chevronDown
+  },
   data() {
     return {
       selectedItem: 0,
@@ -89,8 +97,25 @@ export default {
     outline: none;
     color: var(--pink);
     border-color: var(--pink);
+    path {
+      fill: var(--pink);
+    }
   }
 }
+
+.dropdown__arrow {
+  position: absolute;
+  width:1.5em;
+  height:1.5em;
+  right:1em;
+  top:50%;
+  transform:translateY(-50%);
+  path {
+    fill: var(--gray);
+  }
+}
+
+
 .dropdown__target {
   position: absolute;
   margin-top: 1em;
