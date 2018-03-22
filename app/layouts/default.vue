@@ -25,15 +25,15 @@ export default {
 
 <style>
 .page-enter-active, .page-leave-active {
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
   animation-fill-mode: both;
 }
 @keyframes enter {
   from {
-    transform: translateX(-100%);
+    opacity:0;
   }
   to {
-    transform: translateX(0);
+    opacity:1;
   }
 }
 .page-enter-active {
@@ -42,10 +42,10 @@ export default {
 
 @keyframes leave {
   from {
-    transform: translateX(0);
+    opacity:1;
   }
   to {
-    transform: translateX(100%);
+    opacity:0;
   }
 }
 .page-leave-active {
