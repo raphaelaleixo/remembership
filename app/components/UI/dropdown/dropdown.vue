@@ -1,6 +1,6 @@
 <template>
-  <div class="dropdown">
-      <div class="dropdown__trigger" :class="{'is-opened':isOpened}" tabindex="0" @click="toggleDropdown">
+  <div class="input-holder dropdown">
+      <div class="input dropdown__trigger" :class="{'is-opened':isOpened}" tabindex="0" @click="toggleDropdown">
         {{selected}}
         <chevron-down class="dropdown__arrow"/>
       </div>
@@ -75,32 +75,9 @@ export default {
 
 <style lang="scss">
 @import "~assets/styles/_variables.scss";
-.dropdown {
-  display: inline-block;
-  position: relative;
-  min-width: 30%;
-}
-.dropdown__trigger {
-  border: 1px solid #c6c4c1;
-  line-height: 1;
-  font-size: 0.875em;
-  padding: 1em 4.5em 1em 1.5em;
-  margin-left: -1em;
-  border-radius: 1.5em;
-  color: var(--gray);
-  cursor: pointer;
-  transition: border-color 0.3s ease-out, color 0.3s ease-out;
 
-  &:hover,
-  &:focus,
-  &.is-opened {
-    outline: none;
-    color: var(--pink);
-    border-color: var(--pink);
-    path {
-      fill: var(--pink);
-    }
-  }
+.dropdown {
+  cursor: pointer;
 }
 
 .dropdown__arrow {

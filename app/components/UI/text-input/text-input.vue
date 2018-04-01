@@ -1,28 +1,66 @@
 <template>
-  <div class="text-input">
-    <label :for="inputId">{{inputLabel}}</label>
-    <input :id="inputId" :type="inputType" :name="inputName" />
+  <div class="input-holder" :class="{'is-dirty':teste.length>0}">
+    <label class="input__label" :for="inputId">{{inputLabel}}</label>
+    <input class="input"
+      :id="inputId" :type="inputType" :name="inputName"
+      v-model="teste"/>
   </div>
 </template>
 <script>
 export default {
   props: {
+    value: {
+      type: String
+    },
     inputId: {
-      type:String,
-      required:true
+      type: String,
+      required: true
     },
     inputType: {
-      type:String,
-      default:() => 'Text'
+      type: String,
+      default: () => "Text"
     },
     inputLabel: {
-      type:String,
-      required:true
+      type: String,
+      required: true
     },
     inputName: {
       type: String
     }
+  },
+  computed:{
+    teste: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit('input',val);
+      }
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+@import "~assets/styles/_variables.scss";
+
+.input__label {
+  color:var(--gray);
+  position: absolute;
+  left:0.5em;
+  transform-origin: 0 0 0;
+  line-height: 1;
+  display: block;
+  top:50%;
+  font-size:0.875em;
+  transform:translateY(-50%);
+  transition:opacity 0.3s ease-out;
+  pointer-events: none;
+  .is-dirty & {
+    opacity: 0;
   }
 }
-</script>
+
+</style>
+
 
