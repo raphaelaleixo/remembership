@@ -1,9 +1,9 @@
 <template>
-  <div class="input-holder" :class="{'is-dirty':teste.length>0}">
+  <div class="input-holder">
     <label class="input__label" :for="inputId">{{inputLabel}}</label>
     <input class="input"
       :id="inputId" :type="inputType" :name="inputName"
-      v-model="teste"/>
+      v-model="val"/>
   </div>
 </template>
 <script>
@@ -29,7 +29,7 @@ export default {
     }
   },
   computed:{
-    teste: {
+    val: {
       get() {
         return this.value;
       },

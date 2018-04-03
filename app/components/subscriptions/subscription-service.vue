@@ -1,5 +1,5 @@
 <template>
-  <button class="subscription-service button">
+  <button class="subscription-service button" @click="addService(serviceId)">
     <div class="subscription-service__image" :style="{backgroundImage:'url('+serviceImage+')'}"></div>
     <div class="subscription-service__text">{{serviceName}}</div>
   </button>
@@ -8,6 +8,9 @@
 <script>
   export default {
     props: {
+      serviceId: {
+        type: String
+      },
       serviceImage: {
         type: String,
       },
@@ -15,6 +18,11 @@
         type:String
       }
     },
+    methods: {
+      addService(id) {
+        this.$emit('click',id)
+      }
+    }
   }
 </script>
 

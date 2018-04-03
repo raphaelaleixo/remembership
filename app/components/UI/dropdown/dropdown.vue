@@ -50,7 +50,7 @@ export default {
   methods: {
     selectItem(item) {
       this.selectedItem = item;
-      this.$emit("change", this.options[item]);
+      this.$emit("change", this.options[item].value);
       this.isOpened = false;
       this.$el.blur();
     },
